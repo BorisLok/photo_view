@@ -10,6 +10,8 @@ typedef PhotoViewImageTapUpCallback = Function(BuildContext context,
     TapUpDetails details, PhotoViewControllerValue controllerValue);
 typedef PhotoViewImageTapDownCallback = Function(BuildContext context,
     TapDownDetails details, PhotoViewControllerValue controllerValue);
+typedef PhotoViewImageLongPressCallback = Function(BuildContext context,
+    PhotoViewControllerValue controllerValue);
 
 /// Internal widget in which controls all animations lifecycles, core responses
 /// to user gestures, updates to  the controller state and mounts the entire PhotoView Layout
@@ -23,6 +25,7 @@ class PhotoViewImageWrapper extends StatefulWidget {
     this.enableRotation,
     this.onTapUp,
     this.onTapDown,
+    this.onLongPress,
     @required this.controller,
     @required this.scaleBoundaries,
     @required this.scaleStateCycle,
@@ -39,6 +42,7 @@ class PhotoViewImageWrapper extends StatefulWidget {
     this.enableRotation,
     this.onTapUp,
     this.onTapDown,
+    this.onLongPress,
     @required this.controller,
     @required this.scaleBoundaries,
     @required this.scaleStateCycle,
@@ -63,6 +67,7 @@ class PhotoViewImageWrapper extends StatefulWidget {
 
   final PhotoViewImageTapUpCallback onTapUp;
   final PhotoViewImageTapDownCallback onTapDown;
+  final PhotoViewImageLongPressCallback onLongPress;
 
   @override
   State<StatefulWidget> createState() {
@@ -239,6 +244,10 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
     widget.onTapDown?.call(context, details, controller.value);
   }
 
+  void onLongPress() {
+    widget.onLongPress?.call(context, controller.value);
+  }
+
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
@@ -288,6 +297,7 @@ class _PhotoViewImageWrapperState extends State<PhotoViewImageWrapper>
               onScaleEnd: onScaleEnd,
               onTapUp: onTapUp,
               onTapDown: onTapDown,
+              onLongPress: onLongPress,
             );
           } else {
             return Container();

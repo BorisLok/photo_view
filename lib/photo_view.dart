@@ -239,6 +239,7 @@ class PhotoView extends StatefulWidget {
     this.scaleStateCycle,
     this.onTapUp,
     this.onTapDown,
+    this.onLongPress,
     this.customSize,
   })  : child = null,
         childSize = null,
@@ -267,6 +268,7 @@ class PhotoView extends StatefulWidget {
     this.scaleStateCycle,
     this.onTapUp,
     this.onTapDown,
+    this.onLongPress,
     this.customSize,
   })  : loadingChild = null,
         imageProvider = null,
@@ -343,6 +345,10 @@ class PhotoView extends StatefulWidget {
   /// A pointer that might cause a tap has contacted the screen at a particular
   /// location.
   final PhotoViewImageTapDownCallback onTapDown;
+
+  /// A pointer that might cause a long press has contacted the screen at a particular
+  /// location.
+  final PhotoViewImageLongPressCallback onLongPress;
 
   @override
   State<StatefulWidget> createState() {
@@ -501,6 +507,7 @@ class _PhotoViewState extends State<PhotoView> {
       scaleBoundaries: scaleBoundaries,
       onTapUp: widget.onTapUp,
       onTapDown: widget.onTapDown,
+      onLongPress: widget.onLongPress,
     );
   }
 
@@ -553,6 +560,7 @@ class _PhotoViewState extends State<PhotoView> {
       scaleBoundaries: scaleBoundaries,
       onTapUp: widget.onTapUp,
       onTapDown: widget.onTapDown,
+      onLongPress: widget.onLongPress,
     );
   }
 
